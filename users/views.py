@@ -5,4 +5,9 @@ from django.shortcuts import render
 # index page
 def index(request):
     return render(request, "users/index.html")
+
+# index page
+def signin(request):
+    return render(request, "users/signin.html")
     
+

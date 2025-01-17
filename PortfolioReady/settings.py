@@ -28,16 +28,36 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.google.GoogleOAuth2',  # Enables Google OAuth2
+    'django.contrib.auth.backends.ModelBackend',  # Default Django authentication
+]
+
+
+# Google Auth Credentials
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '68086474847-75qthsh5ge6aq0uolh5tvpdebh9836sr.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = ['email', 'profile']
+SOCIAL_AUTH_GOOGLE_OAUTH2_EXTRA_DATA = ['picture', 'email', 'profile']
+
+
+LOGIN_REDIRECT_URL = '/portal'
+LOGOUT_REDIRECT_URL = '/'
+
+
 # Application definition
 
 INSTALLED_APPS = [
     'users',
+    'portal',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -48,6 +68,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'PortfolioReady.urls'
